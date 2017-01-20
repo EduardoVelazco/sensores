@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv ="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Control Remoto</title>
+		<script src="js/jquery-1.9.1.js"></script>
+		<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>	
+		<link rel="stylesheet" type="text/css" href="css/estilo.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/> 
+	</head>
+     <body><br>
+<div class="container">
+	<header><br>
+		<h4>Control Remoto</h4>
+	<hr>
+	<div class="cuadro_texto">
+		<center>
+			<h4 id="texto1" class="btn btn-small disabled" disabled="disabled"></h4>
+			<h4 id="texto2" class="btn btn-small disabled" disabled="disabled"></h4>
+			<h4 id="texto3" class="btn btn-small disabled" disabled="disabled"></h4>
+		</center>
+		</div>
+	<hr>
+	</header>
+	<section>
+		<table border="diseabled" align="center" cellpadding="20">
+			
+			<tr></tr>
+			<tr>
+				<td><button id="sensorFrontal" class="btn btn-success btn-lg">Sensor frontal</button></td>
+				<td><button id="sensorIzq" class="btn btn-success btn-lg">Sensor izquierdo</button></td>
+				<td><button id="sensorDerecho" class="btn btn-success btn-lg">Sensor Derecho</button></td>
+			</tr>
+			
+		</table>
+	</section>
+
+</div>     	
+    <script type="text/javascript">
+    var estado="";
+    $(function(){
+    	$('#sensorFrontal').click(function(){
+    		$('#texto1').show().text("Midiendo sensor frontal");
+    	window.estado=1;
+    	});
+    	$('#sensorIzq').click(function(){
+    		$('#texto2').show().text("Midiendo sensor Izquierdo");
+    	window.estado=2;
+    	});
+    	$('#sensorDerecho').click(function(){
+    		$('#texto3').show().text("Midiendo sensor derecho");
+    	window.estado=3;
+    	});
+    	$(this).click(function(){
+    		console.log("estado:"+estado );
+    	$.ajax({
+    		data:{valor_estado: estado},
+    		url:'procesa.php',
+    		success: function(response){
+    			$('#texto1').show('slow');
+    			$('#texto2').show('slow');
+    			$('#texto3').show('slow');
+    		}
+    	});
+    	});
+    	});
+    </script> 	
+    
+    
+     </body>
+</html>
